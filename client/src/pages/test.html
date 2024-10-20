@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Inquirer</title>
+  </head>
+  <body>
+    <script type="module" src="/src/main.jsx"></script>
+    <div>
+        <div>
+            <h2>Travel Inquirer</h2>    
+            <h3>Sign Up</h3> 
+            <form className="" onSubmit={handleSubmit}>
+                <label htmlFor="username">Username:</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    value={formData.username}
+                    onChange={handleChange}  
+                    required
+                />
+                <label htmlFor="password">Password:</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password"
+                    value={formData.password} 
+                    onChange={handleChange} 
+                    required
+                />
+                <button className="" type="submit">Submit</button>
+            </form>
+        </div>
+            <aside>
+                <h1> The trip of your dreams starts with Trip Inquirer</h1>
+                <img src= '../../public/backpack-traveller .png' alt='Backpack Traveller' /> 
+                <article>
+                    <p>With insights on hundreds of destinations and endless experiences, 
+                       Travel Inquirer is your go-to guide for smarter, more efficient travel.
+                    </p>
+                </article>
+            </aside>
+        </div>
+  </body>
+</html>
+
+
+
