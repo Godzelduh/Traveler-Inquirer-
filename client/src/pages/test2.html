@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Inquirer</title>
+  </head>
+  <body>
+    <script type="module" src="/src/main.jsx"></script>
+    <div>
+        <h1>Travel Inquirer</h1>   
+        <p>Your trusted site for travelling across United States of America</p>
+        <h3>Where to ..</h3> 
+        <h4>Make your choices</h4> 
+        <p>Select Date</p>
+        {/*TODO add functionality to select start-date and end-date from calendar*/}
+    
+        <p>Choose Your Destination</p>
+        <label htmlFor="city">Enter name of a city in US:</label>
+        <input type="text" id="city" required />
+        <p>Choose your budget sign:</p>
+        <div>
+            <label><input type="checkbox" value="$" />$</label>
+            <label><input type="checkbox" value="$$" /> $</label>
+            <label><input type="checkbox" value="$$$" />$$$</label>
+        </div>        
+         <button className="" type="submit">Submit</button>  
+          <!-- add functionality to display response -->
+    </div>
+  </body>
+  </html>
