@@ -1,5 +1,5 @@
 import React, { useState} from 'react'; 
-
+import{ userLogin} from '../interfafces/userLogin';
 
 const Login = () => {
     //Step 1: Add state to manage form data
@@ -34,7 +34,7 @@ const Login = () => {
                     type="text" 
                     id="username" 
                     name="username" 
-                    value={ formData.username}
+                    
                     onChange={handleChange}  {/* Add onChange handler */}
                     required
                 />
@@ -43,7 +43,7 @@ const Login = () => {
                     type="password" 
                     id="password" 
                     name="password"
-                    value={formData.password} 
+                    
                     onChange={handleChange}  {/* Add onChange handler */}
                     required
                 />
