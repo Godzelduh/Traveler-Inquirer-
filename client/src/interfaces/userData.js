@@ -1,4 +1,3 @@
-import exp = require("constants");
 
 class userData {
     id = '';
