@@ -1,5 +1,6 @@
 import {DataTypes, type Sequelize, Model, type Optional} from 'sequelize';
 import bcrypt from 'bcrypt';
+import { Trip } from './trip';
 
 
 interface UserAttributes{
@@ -25,7 +26,14 @@ export class User
     public async setPassword(password: string) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(password, saltRounds);
-      }
+    }
+
+    public static associate() {
+        User.hasMany(Trip, {
+            foreignKey: 'userId',
+            as: 'trips'
+        });
+    }
 }
 
 

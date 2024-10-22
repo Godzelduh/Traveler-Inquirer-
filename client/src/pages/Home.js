@@ -4,7 +4,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Travel Inquirer</h1>   
+            <h1 className='header'>Travel Inquirer</h1>   
             <h3>Your trusted site for travelling across United States of America</h3>
             <h3>Where to ..</h3> 
             <h4>Make your choices</h4> 
