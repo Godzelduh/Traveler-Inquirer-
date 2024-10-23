@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 const Home = () => {
     const [city, setCity] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -9,16 +9,45 @@ const Home = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+
         // Pass parameters to the results page
-        navigate('/DisplayResult', { state: { city, startDate, endDate, budget } }); //to navigate to DisplayResult page?
+        // navigate('/DisplayResult', { state: { city, startDate, endDate, budget } }); //to navigate to DisplayResult page?
+    
+        // send a fetch request to the server /api/trips to get all trips based of user input
+        
+        // fetch("/api/trips", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         city, startDate, endDate, budget
+        //     })
+        // })
+        // .then(res => res.json())
+        // .then(results => {
+               // dummy data
+                const results = [
+                    {
+                        city: "New York",
+                        startDate: "10/24/24",
+                        endDate: "10/25/24",
+                        budget: 1000
+                    },
+                    {
+                        city: "London",
+                        startDate: "10/28/24",
+                        endDate: "10/31/24",
+                        budget: 5000
+                    }
+                ]
+
+            navigate('/results', { state: { results, city } });
+        // })
+
+        
+    
     };
     return (
-        <div className='parent-container'>
-            <nav>
-        <Link to="/login">Login</Link> 
-        <Link to="/results">Display Results</Link>
-        <Link to="/users">Display Users</Link>
-      </nav>
+ 
             <header className='header'>
                 <h1>Travel Inquirer</h1>
                 <h3>Your trusted site for travelling across United States of America</h3>
@@ -72,7 +101,6 @@ const Home = () => {
                     </form>
                 </div>
             </header>
-        </div>
     );
 }
 export default Home;

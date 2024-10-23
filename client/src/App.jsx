@@ -1,15 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import DisplayResults from './components/DisplayResults';
-import DisplayUsers from './components/DisplayUsers';
-import '../src/bulma.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import DisplayResults from './pages/DisplayResult';
+import DisplayUsers from './pages/DisplayUsers';
+import Navbar from './components/Navbar';
+
 
 function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
