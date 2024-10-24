@@ -24,22 +24,27 @@ const Login = () => {
   };
 
   return (
-    <div className="column is-half-desktop">
-        <img src='./backpack-traveller .png'></img>
-      <h2 className="title is-2">Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="field">
+
+<div className="container">
+  <section className="section">
+    <div className="container">
+      <h2 className="title is-2 has-text-success">Login</h2>
+      <form className="box has-background-primary-light" onSubmit={handleLogin}>
+        <div className="column is-one-third">
+
           <label className="label">Username:</label>
           <div className="control">
             <input
               className="input"
-              type="text"
+              type="text has-text-black"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
         </div>
-        <div className="field">
+        <div className="column is-one-third">
+
           <label className="label">Password:</label>
           <div className="control">
             <input
@@ -47,6 +52,8 @@ const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+
             />
           </div>
         </div>
@@ -56,7 +63,12 @@ const Login = () => {
           </div>
         </div>
       </form>
+      <aside>
+      <img src='./backpack-traveler.png' alt="Backpack-Traveler" />
+      </aside>
     </div>
+  </section>
+</div>
   );
 };
 
