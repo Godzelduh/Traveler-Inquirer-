@@ -18,11 +18,13 @@ const DisplayUsers = () => {
   }, []);
 
   return (
-    <div>
-      <h2>User List</h2>
+    <div className="container">
+      <h2 className="title is-2">User List</h2>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.username}</li>
+          <li key={user.id} className="box">
+            {user.username}
+          </li>
         ))}
       </ul>
     </div>
