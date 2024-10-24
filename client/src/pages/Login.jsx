@@ -24,22 +24,37 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="column is-half-desktop">
+        <img src='./backpack-traveller .png'></img>
+      <h2 className="title is-2">Login</h2>
       <form onSubmit={handleLogin}>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
+        <div className="field">
+          <label className="label">Username:</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Password:</label>
+          <div className="control">
+            <input
+              className="input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <button className="button is-primary" type="submit">Login</button>
+          </div>
+        </div>
       </form>
     </div>
   );
