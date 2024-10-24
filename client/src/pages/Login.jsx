@@ -24,24 +24,47 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
+<div className="container">
+  <section className="section">
+    <div className="container">
+      <h2 className="title is-2 has-text-success">Login</h2>
+      <form className="box has-background-primary-light" onSubmit={handleLogin}>
+        <div className="column is-one-third">
+          <label className="label">Username:</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text has-text-black"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="column is-one-third">
+          <label className="label">Password:</label>
+          <div className="control">
+            <input
+              className="input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <button className="button is-primary" type="submit">Login</button>
+          </div>
+        </div>
       </form>
+      <aside>
+      <img src='./backpack-traveler.png' alt="Backpack-Traveler" />
+      </aside>
     </div>
+  </section>
+</div>
   );
 };
 
