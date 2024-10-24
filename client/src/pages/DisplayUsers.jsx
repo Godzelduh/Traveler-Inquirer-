@@ -18,6 +18,7 @@ const DisplayUsers = () => {
   }, []);
 
   return (
+
 <div className="container">
   <section className="section">
     <div className="container">
