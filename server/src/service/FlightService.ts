@@ -10,8 +10,8 @@ class FlightService {
     private apiKey: string;
     private location: string;
     constructor() {
-        this.baseUrl = process.env.FLIGHT_API_BASE_URL || '';
-        this.apiKey = process.env.FLIGHT_API_KEY || '';
+        this.baseUrl = process.env.AMADEUS_BASE_URL || '';
+        this.apiKey = process.env.AMADEUS_CLIENT_ID || '';
         this.location = '';
     }
 

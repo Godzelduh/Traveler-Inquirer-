@@ -35,7 +35,7 @@ const Login = () => {
                     id="username" 
                     name="username" 
                     
-                    onChange={handleChange}  {/* Add onChange handler */}
+                    onChange={handleChange}  
                     required
                 />
                 <label htmlFor="password">Password:</label>
@@ -44,7 +44,7 @@ const Login = () => {
                     id="password" 
                     name="password"
                     
-                    onChange={handleChange}  {/* Add onChange handler */}
+                    onChange={handleChange}  
                     required
                 />
                 <button className="" type="submit">Submit</button>
