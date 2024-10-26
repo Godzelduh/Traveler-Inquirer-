@@ -20,9 +20,9 @@ function Navbar() {
                         Home
                     </a>
 
-                    {/* <a href="/results" class="navbar-item">
+                    <a href="/results" class="navbar-item">
                         Display Results
-                    </a> */}
+                    </a>
 
                     <a href="/users" class="navbar-item">
                         Display Users
