@@ -1,5 +1,4 @@
 input::placeholder {
-    color: #999; /* Change the color */
-    font-style: italic; /* Make the text italic */
-    font-size: 14px; /* Adjust the font size */
+    color: #999;
+    font-size: 14px; 
 }
