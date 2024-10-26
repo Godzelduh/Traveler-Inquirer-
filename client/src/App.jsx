@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import DisplayResults from './pages/DisplayResults';
 import DisplayUsers from './pages/DisplayUsers';
 import Navbar from './components/Navbar';
+import Footer from './components/footer';
 
 
 function App() {
@@ -18,9 +19,11 @@ function App() {
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />
         </Routes>
-      </div>
-    </Router>
-  );
+        
+      <Footer />
+    </div>
+  </Router>
+);
 }
 
 export default App;
