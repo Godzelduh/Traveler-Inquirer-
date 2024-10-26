@@ -1,4 +1,4 @@
-import {DataTypes, type Sequelize, Model, type Optional} from 'sequelize';
+import {DataTypes, type Sequelize, Model, HasManyCreateAssociationMixin , type Optional} from 'sequelize';
 import bcrypt from 'bcrypt';
 import { Trip } from './trip';
 
@@ -30,10 +30,15 @@ export class User
 
     public static associate() {
         User.hasMany(Trip, {
+            sourcekey: 'id',
             foreignKey: 'userId',
             as: 'trips'
         });
     }
+
+    public readonly searches?: Trip[];
+    public createSearch!: HasManyCreateAssociationMixin<Trip>;
+
 }
 
 
