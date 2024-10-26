@@ -24,51 +24,69 @@ const Login = () => {
   };
 
   return (
-
-<div className="container">
-  <section className="section">
-    <div className="container">
-      <h2 className="title is-2 has-text-success">Login</h2>
-      <form className="box has-background-primary-light" onSubmit={handleLogin}>
-        <div className="column is-one-third">
-
-          <label className="label">Username:</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text has-text-black"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+    <>
+      <div className="has-background-primary-light">
+        <div className="container">
+          <section className="section has-background-primary">
+            <div className="container has-background-primary">
+              <h2 className="title is-2 has-text-light has-text-centered">Login</h2>
+              <form className="box has-background-primary-light" onSubmit={handleLogin}>
+                <div className="column is-one-third">
+                  <label className="label">Username:</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text has-text-black"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="column is-one-third">
+                  <label className="label">Password:</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="field is-grouped is-grouped-mobile is-grouped-tablet">
+                  <div className="control">
+                    <button className="button is-primary" type="submit">Login</button>
+                  </div>
+                  <div className="control">
+                    <button className="button is-primary" type="submit">Already a member? Sign up!</button>
+                  </div>
+                </div>
+              </form>
+              <aside>
+                <section className="section">
+                  <div className="container">
+                    <div className="columns">
+                      <div className="column">
+                        <figure className="image is-4by5">
+                          <img src="./backpack-traveler.png" alt="Backpack Traveler"></img>
+                        </figure>
+                      </div>
+                      <div className="column">
+                        <figure className="image is-4by5">
+                          <img src="first-class-flight.webp" alt="First Class Sign"></img>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </aside>
+            </div>
+          </section>
         </div>
-        <div className="column is-one-third">
-
-          <label className="label">Password:</label>
-          <div className="control">
-            <input
-              className="input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-
-            />
-          </div>
-        </div>
-        <div className="field">
-          <div className="control">
-            <button className="button is-primary" type="submit">Login</button>
-          </div>
-        </div>
-      </form>
-      <aside>
-      <img src='./backpack-traveler.png' alt="Backpack-Traveler" />
-      </aside>
-    </div>
-  </section>
-</div>
+      </div>
+    </>
   );
 };
 
