@@ -1,7 +1,7 @@
 import express, {Router, Reqeust, Response} from 'express';
-import {AmadeusAuthService} from '../middleware/AmedaAuth';
-import {authenticateToken} from '../middleware/AmedaMiddle';
-import { AmadeusConfig } from '../middleware/AmedaAuth';
+import {AmadeusAuthService} from '../middleware/AmedaAuth.js';
+import {authenticateToken} from '../middleware/AmedaMiddle.js';
+import { AmadeusConfig } from '../middleware/AmedaAuth.js';
 
 export function createAmadeusRoute(config: AmadeusConfig): Router{
     const router = Router();

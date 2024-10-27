@@ -1,61 +1,94 @@
-import {DataTypes, type Sequelize, Model, type Optional} from 'sequelize';
+import {DataTypes, type Sequelize, Model, BelongsToCreateAssociationMixin, type Optional} from 'sequelize';
+import { User } from './user';
 
 interface TripAttributes {
     id: number;
-    destination: string;
-    startDate: Date;
-    endDate: Date;
-    travelers: number;
-    priceRange: string;
     userId: number;
+    originLocationCode: string;
+    destinationLocationCode: string;
+    departureDate: Date;
+    returnDate: Date;
+    travelers: number;
+    travelClass: string;
+    results: string;
+    selectedOfferId: string;
+    
 }
 
 interface TripCreationAttributes extends Optional<TripAttributes, 'id'> {}
 
 export class Trip extends Model<TripAttributes, TripCreationAttributes> implements TripAttributes {
     public id!: number;
-    public destination!: string;
-    public startDate!: Date;
-    public endDate!: Date;
-    public travelers!: number;
-    public priceRange!: string;
     public userId!: number;
+    public originLocationCode!: string;
+    public destinationLocationCode!: string;
+    public departureDate!: Date;
+    public returnDate!: Date;
+    public travelers!: number;
+    public travelClass!: string;
+    public results!: string;
+    public selectedOfferId!: string;
+
+    public readonly user?: User;
+    public createUser!: BelongsToCreateAssociationMixin<User>;
+
+    public static associate() {
+        Trip.belongsTo(User, {
+            foreignKey: 'userId',
+            as: 'user'
+        });
+    }
+    
 }
 
-export function TripFactory(sequelize: Sequelize): typeof Trip{
+export function TripFactory(sequelize: Sequelize): typeof Trip
+{
     Trip.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        destination: {
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            }
+        },
+        originLocationCode: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        startDate: {
+        destinationLocationCode: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        departureDate: {
             type: DataTypes.DATE,
             allowNull: false
         },
-        endDate: {
+        returnDate: {
             type: DataTypes.DATE,
             allowNull: false
         },
         travelers: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 1
+        },
+        travelClass: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        priceRange: {
-            type: DataTypes.STRING,
+        results: {
+            type: DataTypes.TEXT,
             allowNull: true
         },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            refrences: {
-                model: 'Users',
-                key: 'id'
-            }
+        selectedOfferId: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     },
     {
@@ -63,6 +96,7 @@ export function TripFactory(sequelize: Sequelize): typeof Trip{
         tableName: 'trips'
     }
 );
+
 
 return Trip;
 }

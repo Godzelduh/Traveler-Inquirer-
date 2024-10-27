@@ -1,13 +1,47 @@
-import sequelize from '../config/connection.js';
-import { User, UserFactory } from './user.js';
-import { Trip, TripFactory } from './trip.js';
+import {Sequelize} from 'sequelize';
+import {  UserFactory } from './user.js';
+import {  TripFactory } from './trip.js';
 
-const UserM = UserFactory(sequelize);
-const TripM = TripFactory(sequelize);
+export interface DatabaseModels {
+    User: ReturnType<typeof UserFactory>;
+    Trip: ReturnType<typeof TripFactory>;   
+}
+
+export async function inititializeDatabase(): Promise<{
+    sequelize: Sequelize,
+    models: DatabaseModels
+}> {
+    const sequelize = new Sequelize({
+        dialect: 'postgres',
+        host: process.env.DB_HOST || 'localhost',
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        logging: process.env.NODE_ENV !== 'production',
+    })
 
 
-UserM.associate();
-TripM.belongsTo(UserM, { foreignKey: 'userId', as: 'user' });
+const User = UserFactory(sequelize);
+const Trip = TripFactory(sequelize);
 
-export { User };
-export { Trip };
+User.hasMany(Trip, {
+    sourceKey: 'id',
+    foreignKey: 'userId',
+    as: 'trips'
+});
+
+Trip.belongsTo(User, {
+    foreignKey: 'userId',
+    as: 'user'
+});
+
+if (process.env.NODE_ENV !== 'Production') {
+    await sequelize.sync({ force: true });
+}
+
+return {
+    sequelize,
+    models: { User, Trip }
+};
+}
+

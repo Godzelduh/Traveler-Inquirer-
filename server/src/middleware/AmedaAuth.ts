@@ -8,6 +8,7 @@ export interface AmadeusConfig{
     clientSecret: string;
     jwtSecret: string;
     isProduction: boolean;
+   
 }
 
 interface TokenResponse{
