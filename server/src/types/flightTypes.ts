@@ -22,7 +22,7 @@ export interface FlightSearchParams {
     };
   }
   
-  interface FlightOffer {
+export interface FlightOffer {
     type: string;
     id: string;
     source: string;
