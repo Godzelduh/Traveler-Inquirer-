@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Nav from '../components/Nav';
 
 const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
@@ -26,7 +26,7 @@ const DisplayUsers = () => {
 
   return (
     <div>
-      <Navbar />
+      <Nav />
       <div className="columns">
         <div className="column">
           <div className="container">
