@@ -5,7 +5,7 @@ interface JwtPayload{
     username: string;
 }
 
-export const authenticateToken = (
+export const authenticateUser = (
     req: Request,
     res: Response,
     next: NextFunction

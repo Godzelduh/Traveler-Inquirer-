@@ -1,8 +1,10 @@
 import { AmadeusService } from './amadeusService';
 import { TripRepository } from '../service/FlightServiceSearch.js';
-import { Trip } from '../models/Trip.js';
 import { User } from '../models/user.js';
-import { FlightSearchParams, PriceConfirmation } from '../types/flightTypes';
+import { FlightSearchParams, FlightOffer, PriceConfirmation } from '../types/flightTypes';
+
+
+
 
 export class TripService {
   constructor(
@@ -36,7 +38,7 @@ export class TripService {
     return {
       initialOffers,
       confirmedPrices,
-      tripId: savedTrip.id
+      tripId: savedTrip.id.toString()
     };
   }
 

@@ -1,18 +1,46 @@
-import {DataTypes, type Sequelize, Model, BelongsToCreateAssociationMixin, type Optional} from 'sequelize';
+import {DataTypes, type Sequelize, Model, type Optional} from 'sequelize';
 import { User } from './user';
 
 interface TripAttributes {
     id: number;
     userId: number;
-    originLocationCode: string;
-    destinationLocationCode: string;
+    searchParams:
+    {
+    fromLocation: string;
+    toLocation: string;
     departureDate: Date;
     returnDate: Date;
-    travelers: number;
+    adults: number;
     travelClass: string;
-    results: string;
-    selectedOfferId: string;
+    maxPrice: number;
+    flightOfferId: string;
+    itineraries: string;
+    };
+    results?: {
+        initialOffers: FlightOffer[];
+        confirmedPrices: PriceConfirmation;
+      };
+    savedAt: Date;
     
+}
+
+interface Segment {
+    depature: {
+     iataCode: string;
+     at: string;
+    };
+    arrival: {
+        iataCode: string;
+        at: string;
+    };
+    carrierCode: string;
+    number: string;
+}
+
+
+interface Itinerary {
+    duartion: string;
+    segments: Segment[];
 }
 
 interface TripCreationAttributes extends Optional<TripAttributes, 'id'> {}
@@ -20,24 +48,24 @@ interface TripCreationAttributes extends Optional<TripAttributes, 'id'> {}
 export class Trip extends Model<TripAttributes, TripCreationAttributes> implements TripAttributes {
     public id!: number;
     public userId!: number;
-    public originLocationCode!: string;
-    public destinationLocationCode!: string;
-    public departureDate!: Date;
-    public returnDate!: Date;
-    public travelers!: number;
-    public travelClass!: string;
-    public results!: string;
-    public selectedOfferId!: string;
+    public searchParams!: {
+        fromLocation: string;
+        toLocation: string;
+        departureDate: Date;
+        returnDate: Date;
+        adults: number;
+        travelClass: string;
+        maxPrice: number;
+        flightOfferId: string;
+        itineraries: string;
+    };
+    public results?: {
+        initialOffers: FlightOffer[];
+        confirmedPrices: PriceConfirmation;
+      };
+    public readonly savedAt!: Date;
 
-    public readonly user?: User;
-    public createUser!: BelongsToCreateAssociationMixin<User>;
-
-    public static associate() {
-        Trip.belongsTo(User, {
-            foreignKey: 'userId',
-            as: 'user'
-        });
-    }
+  
     
 }
 
@@ -53,43 +81,53 @@ export function TripFactory(sequelize: Sequelize): typeof Trip
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'users',
+                model: 'User',
                 key: 'id'
             }
         },
-        originLocationCode: {
+        fromLocation: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        destinationLocationCode: {
+          },
+        toLocation: {
             type: DataTypes.STRING,
             allowNull: false
-        },
+          },
         departureDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
-        },
+          },
         returnDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
-        },
-        travelers: {
+          },
+        adults: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 1
-        },
+            value: 1,
+          },
         travelClass: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        results: {
-            type: DataTypes.TEXT,
-            allowNull: true
+        maxPrice: {
+            type: DataTypes.DECIMAL(10, 2)
         },
-        selectedOfferId: {
+        flightOfferId: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
+        },
+        itineraries: {
+            type: DataTypes.JSON,
+            allowNULL: false
+        },
+        results: {
+            type: DataTypes.JSON
+        },
+        savedAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
         }
+        
     },
     {
         sequelize,

@@ -1,13 +1,37 @@
-import {Router } from 'express';
-import {userRouter} from './user-routes.js';
-import authRoutes from '../auth-Route.js'
-import apiRoutes from '../api/index.js';
-import { authenticateToken } from '../../middleware/auth.js';
+import { Router } from 'express';
+import { userRouter } from './user-routes';
+import { createTripRouter } from './trip-routes';
+import { AmadeusService } from '../../service/amadeusService';
 
-const router = Router();
+interface ProtectedRouterConfig {
+  models: any;
+  amadeusConfig: {
+    clientID: string;
+    clientSecret: string;
+    isProduction: boolean;
+  };
+}
 
-router.use('/auth', authRoutes);
-router.use('/api', authenticateToken, apiRoutes);
+export function createProtectedRouter({ models, amadeusConfig }: ProtectedRouterConfig) {
+  const router = Router();
+  
+  // Initialize Amadeus service for protected routes
+  const amadeusService = new AmadeusService(
+    amadeusConfig.clientID,
+    amadeusConfig.clientSecret,
+    amadeusConfig.isProduction
+  );
+  
+  // Protected user profile routes
+  router.use('/users', userRouter);
+  
+  // Protected trip routes that use Amadeus service
+  router.use('/trips', createTripRouter({
+    models,
+    amadeusService
+  }));
+  
+  return router;
+}
 
-export default router;
 

@@ -1,20 +1,62 @@
-const forceDatabaseRefresh = false;
+import dotenv from 'dotenv';
+import {createApp} from './App.js';
+import {inititializeDatabase} from './models/index.js';
 
-import express from 'express';
-import sequelize from './config/connection.js';
-import routes from './routes/index.js';
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+dotenv.config();
 
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
+async function startServer() {
+  try {
+    // Validate required environment variables
+    const requiredEnvVars = [
+      'DB_HOST',
+      'DB_USER',
+      'DB_PASSWORD',
+      'DB_NAME',
+      'JWT_SECRET_KEY',
+      'AMADEUS_CLIENT_ID',
+      'AMADEUS_CLIENT_SECRET'
+    ];
 
-app.use(express.json());
-app.use(routes);
+    for (const envVar of requiredEnvVars) {
+      if (!process.env[envVar]) {
+        throw new Error(`Missing required environment variable: ${envVar}`);
+      }
+    }
 
-sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
-});
+    // Initialize database and get models
+    const { sequelize, models } = await inititializeDatabase();
+
+    // Create Express app with models
+    const app = await createApp({ models });
+
+    const PORT = process.env.PORT || 3000;
+    const server = app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+
+    // Graceful shutdown
+    process.on('SIGTERM', async () => {
+      console.log('SIGTERM received. Starting graceful shutdown...');
+      
+      // Close server first (stop accepting new requests)
+      await new Promise((resolve) => {
+        server.close(resolve);
+      });
+      console.log('Server closed');
+
+      // Close database connection
+      await sequelize.close();
+      console.log('Database connection closed');
+
+      process.exit(0);
+    });
+
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
