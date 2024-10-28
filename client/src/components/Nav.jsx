@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../utils/auth';
+import auth from '../utlis/auth';
 
-const Navbar = () => {
+const Nav = () => {
   // State to track the login status
   const [loginCheck, setLoginCheck] = useState(false);
 
@@ -47,4 +47,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+export default Nav;
