@@ -5,11 +5,9 @@
     "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "NODE_ENV=production node server/dist/server.js",
+      "start": "cd server && npm start",
       "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
-      "server": "cd server && npm start",
       "server:dev": "cd server && npm run dev",
-      "client:build": "cd client && npm run build",
       "client:dev": "cd client && npm run dev",
       "build": "cd client && npm run build",
       "seed": "cd server && npm run seed",
