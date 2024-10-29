@@ -9,13 +9,14 @@ async function startServer() {
   try {
     // Validate required environment variables
     const requiredEnvVars = [
-      'DB_HOST',
+      'DATABASE_URL',
       'DB_USER',
       'DB_PASSWORD',
       'DB_NAME',
       'JWT_SECRET_KEY',
       'AMADEUS_CLIENT_ID',
-      'AMADEUS_CLIENT_SECRET'
+      'AMADEUS_CLIENT_SECRET',
+      'AMADEUS_API_URL',
     ];
 
     for (const envVar of requiredEnvVars) {
@@ -30,7 +31,7 @@ async function startServer() {
     // Create Express app with models
     const app = await createApp({ models });
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 3001;
     const server = app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
