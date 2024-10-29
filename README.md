@@ -25,44 +25,40 @@ SO THAT I don't need to be concerned with setting up the intial criteria.
 
 ## Acceptance Criteria 
 
-PROVIDED a convenient application, 
+PROVIDED a convenient website application, 
 <br>
-WHEN I load the app, 
+WHEN I boot up the url launch page, 
 <br>
-THEN I have the main page loaded to input my height and weight
+THEN I have the login page to enter my details otherwise sign up
 <br>
-WHEN I submit my data,
+WHEN I submit my answers,
 <br>
-THEN I receive the results of my BMI.
+THEN I am navigated to the home page.
 <br>
-WHEN I navigate to the 'Results' page,
+WHEN I enter the flight search page,
 <br>
-THEN I see the daily logs of all my entries.
+THEN I now can input the answers to where I want to travel to and when.
 <br>
-WHEN I try to enter a new log twice on the same day, 
+WHEN I submit the answers into the bar, 
 <br>
-THEN the page does not log it in multiple times.
+THEN the page shows the flights available based off my answers.
 <br>
-WHEN I want to learn fun facts, and the relevance of of BMI today, 
+WHEN I want to contact the developers of the website, 
 <br>
-THEN I tap on to the 'Relevance' tab to read about everything I want to know. 
+THEN I tap on the "contact" button at the bottom, or in the navigational. 
 <br>
-WHEN I want to go back to the 'home' or 'results' page,
+WHEN I want to contact anyone on the page,
 <br>
-THEN I tap on any tab on the navigational bar.
+THEN I can take note of the github profiles provided.
 <br>
 
 ## Installation 
 
-The installation process is quick and easy since everything is already set up for the user. The user will only need to input the URL into the search bar, that will then take them right onto the home page of 'What is My BMI?'. Once they've gotten into the website, they may navigate anywhere they would like by clicking the navigational buttons on the top of the page, as well as logging their BMI in the modal. 
+The installation process is a convenient application to where the user merely just has to enter the URL. Once they have gotten into the website application, they then can use it like normal once they create their account to use whenever they may please.
 
 ## Usage 
 
-This is a quick and easy to use application by simply picking the feet and inches of the user by navigating through a drop down menu. 
-For the weight portion, we ask the users to just type in what their weight is, and immediately after this, they will see the results of their BMI.
-They can also refer to the 'Results' page to see a daily log of any changes they've had on their BMI, which is recommending for any user trying to make this part of a new lifestyle.
-
-<img>
+This website application offers a convenient way to have the user think of a vacation spot they want to go to by creating their account with the credentials they provide. Once it is created, the stored data will then provide the user a list of options they can choose from that will be relevant to what their needs are with that specific vacation. They can use this website application anytime they want to plan a vacation in the near or far future, and will be able to expect roughly how much money they will be spending as well for their travels.
 
 ## Credits
 
@@ -76,9 +72,9 @@ Kimani Chambliss - https://github.com/ManiChams
 
 ## Resources 
 
-Travel API - Amadeus 
+Travel API - FLIGHT_API_KEY=RnvXDQSsQKDVGPprpOrZP4VhvRskMhsQ 
 
-Second API -
+Secret Key API - APi secret KEy: sVbCQUkKyl3zCd0r
 
 ## License
 
