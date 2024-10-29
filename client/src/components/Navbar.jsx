@@ -30,17 +30,17 @@ function Navbar() {
             </Link>
           )}
 
-          {location.pathname !== '/results' && (
-            <Link to="/results" className="navbar-item">
-              Display Results
+           {location.pathname !== '/flights' && (
+            <Link to="/flights" className="navbar-item">
+            Flight Search
             </Link>
-          )}
+          )} 
 
-          {location.pathname !== '/users' && (
+          {/* {location.pathname !== '/users' && (
             <Link to="/users" className="navbar-item">
               Display Users
             </Link>
-          )}
+          )} */}
         </div>
 
         <div className="navbar-end">
@@ -48,9 +48,9 @@ function Navbar() {
             <div className="buttons">
               {location.pathname === '/' && (
                 <>
-                  <a className="button is-primary">
+                  {/* <a className="button is-primary">
                     <strong>Sign up</strong>
-                  </a>
+                  </a> */}
                   <a href="/login" className="button is-light">
                     Log in
                   </a>
