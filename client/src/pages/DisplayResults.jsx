@@ -1,23 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../styles/style.css';
+import 'bulma/css/bulma.css';
 
 const DisplayResults = () => {
   const { state } = useLocation();
 
+
+  const [flightResults, setFlightResults] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFlightResults = async () => {
+      try {
+        const response = await fetch('/api/flights/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(state)
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch flight results');
+        }
+        
+        const data = await response.json();
+        setFlightResults(data.initialOffers);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchFlightResults();
+  }, [state]);
+
   return (
-    <div>
-      <section className="no-padding">
-        <img src='./Beaches.jpg' alt="Full-width image" className="image is-fullwidth" />
-      </section>
-      <div className='navbar is-primary pt-3'>
-        <div className="navbar-brand">
-          <h1 className="title is-4 has-text-centered" style={{ marginLeft: '650px' }}>Search Results</h1>
+    <div className="container">
+      {loading && <p className="notification is-info">Loading...</p>}
+      {error && <p className="notification is-danger">{error}</p>}
+      {flightResults && (
+        <div className="columns is-multiline">
+          {flightResults.map((flight, index) => (
+            <div className="column is-one-third" key={index}>
+              <div className="card">
+                <div className="card-content">
+                  <p className="title">{flight.airline}</p>
+                  <p className="subtitle">{flight.price} {flight.currency}</p>
+                  <p>Departure: {flight.departure}</p>
+                  <p>Arrival: {flight.arrival}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+ main
         </div>
-      </div>
-      </div>
+      )}
+    </div>
   );
 };
+
 export default DisplayResults;
-
-

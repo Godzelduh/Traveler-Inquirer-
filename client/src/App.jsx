@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './pages/Home';
+import FlightSearch from './pages/FlightSearch';
 import Login from './pages/Login';
 import DisplayResults from '../src/pages/DisplayResults';
 import DisplayUsers from './pages/DisplayUsers';
-import Navbar from './components/Navbar';
+import Nav from './components/Navbar';
 import Footer from './components/footer';
 import Contact from './pages/Contact';
 
@@ -13,9 +13,9 @@ function App() {
   return (
     <Router>
       <div>
-        <Navbar />
+        <Nav />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<FlightSearch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />

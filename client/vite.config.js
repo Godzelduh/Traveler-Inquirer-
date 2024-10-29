@@ -5,11 +5,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    sourcemapIgnoreList: (path) => path.includes('bulma.css')
+    sourcemapIgnoreList: (path) => path.includes('bulma.css') 
   },
-  build: {
-    sourcemap: false
-  }
+  css:{
+    devSourcemap: false
+  },
+
 });
 
 
