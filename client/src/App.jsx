@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import DisplayResults from '../src/pages/DisplayResults';
 import DisplayUsers from './pages/DisplayUsers';
 import Nav from './components/Navbar';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 
