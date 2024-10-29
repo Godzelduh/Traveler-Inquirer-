@@ -1,6 +1,11 @@
 import {Sequelize} from 'sequelize';
+import dotenv from 'dotenv';
 import {  UserFactory } from './user.js';
 import {  TripFactory } from './trip.js';
+
+
+
+dotenv.config();
 
 export interface DatabaseModels {
     User: ReturnType<typeof UserFactory>;
@@ -11,7 +16,7 @@ export async function inititializeDatabase(): Promise<{
     sequelize: Sequelize,
     models: DatabaseModels
 }> {
-    const sequelize = new Sequelize({
+    const sequelize = new Sequelize(process.env.DATABASE_URL || '', {
         dialect: 'postgres',
         host: process.env.DB_HOST || 'localhost',
         username: process.env.DB_USER,
