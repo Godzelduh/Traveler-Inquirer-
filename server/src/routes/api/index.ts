@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { userRouter } from './user-routes';
-import { createTripRouter } from './trip-routes';
-import { AmadeusService } from '../../service/amadeusService';
+import { userRouter } from './user-routes.js';
+import { createTripRouter } from './trip-routes.js';
+import { AmadeusService } from '../../service/amadeusService.js';
 
 interface ProtectedRouterConfig {
   models: any;
@@ -12,14 +12,14 @@ interface ProtectedRouterConfig {
   };
 }
 
-export function createProtectedRouter({ models, amadeusConfig }: ProtectedRouterConfig) {
+export function createProtectedRouter(config: ProtectedRouterConfig) {
   const router = Router();
   
   // Initialize Amadeus service for protected routes
   const amadeusService = new AmadeusService(
-    amadeusConfig.clientID,
-    amadeusConfig.clientSecret,
-    amadeusConfig.isProduction
+    config.amadeusConfig.clientID,
+    config.amadeusConfig.clientSecret,
+    config.amadeusConfig.isProduction
   );
   
   // Protected user profile routes
@@ -27,7 +27,7 @@ export function createProtectedRouter({ models, amadeusConfig }: ProtectedRouter
   
   // Protected trip routes that use Amadeus service
   router.use('/trips', createTripRouter({
-    models,
+    models: config.models,
     amadeusService
   }));
   

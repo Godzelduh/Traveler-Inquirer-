@@ -1,3 +1,4 @@
+
 export interface FlightSearchParams {
     originLocationCode: string;
     destinationLocationCode: string;
@@ -12,6 +13,8 @@ export interface FlightSearchParams {
   }
   
   export interface PriceConfirmation {
+    total: number;
+    currency: string;
     flightOffers: FlightOffer[];
     bookingRequirements?: {
       invoiceAddressRequired?: boolean;

@@ -1,7 +1,7 @@
-import { Trip } from "../models/trip";
-import { TripService } from "../service/tripService";
-import { User } from "../models/user";
-import { FlightSearchParams, FlightOffer, PriceConfirmation } from "../types/flightTypes";
+import { Trip } from "../models/trip.js";
+import { TripService } from "../service/tripService.js";
+import { User } from "../models/user.js";
+import { FlightSearchParams, FlightOffer, PriceConfirmation } from "../types/flightTypes.js";
 
 
 
@@ -15,7 +15,7 @@ export class SavedTripService {
         flightOffer: FlightOffer,
         user: User
     ): Promise<Trip> {
-      const confirmedPrice = await this.tripService.confirmPrice(flightOffer);
+      const confirmedPrice = await this.tripService.confirmPrices(flightOffer);
 
 
       return await Trip.create({

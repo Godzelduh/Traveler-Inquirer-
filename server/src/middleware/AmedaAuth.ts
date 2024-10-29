@@ -1,7 +1,7 @@
-import {Router, Request, Response} from 'express';
+import express from 'express';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
-import { JWTPayload } from './AmedaMiddle';
+import { JWTPayload } from './AmedaMiddle.js';
 
 export interface AmadeusConfig{
     clientID: string;
