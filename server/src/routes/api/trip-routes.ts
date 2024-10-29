@@ -55,10 +55,10 @@ export const createTripRouter = (config: {models: any; amadeusService?: AmadeusS
         req.user as User
       );
   
-      res.json({ success: true, data: savedTrip });
+      return res.json({ success: true, data: savedTrip });
     } catch (error) {
       console.error('Error saving flight:', error);
-      res.status(500).json({ success: false, error: 'Error saving flight' });
+      return res.status(500).json({ success: false, error: 'Error saving flight' });
     }
   });
   
@@ -70,10 +70,10 @@ export const createTripRouter = (config: {models: any; amadeusService?: AmadeusS
       }
   
       const savedTrip = await savedTripService.getUserSavedTrips(req.user.id);
-      res.json({ success: true, data: savedTrip });
+      return res.json({ success: true, data: savedTrip });
     } catch (error) {
       console.error('Error fetching saved flights:', error);
-      res.status(500).json({ success: false, error: 'Error fetching saved flights' });
+      return res.status(500).json({ success: false, error: 'Error fetching saved flights' });
     }
   });
   
@@ -93,10 +93,10 @@ export const createTripRouter = (config: {models: any; amadeusService?: AmadeusS
         return res.status(404).json({ success: false, error: 'Saved flight not found' });
       }
   
-      res.json({ success: true, data: updatedTrip });
+      return res.json({ success: true, data: updatedTrip });
     } catch (error) {
       console.error('Error refreshing flight price:', error);
-      res.status(500).json({ success: false, error: 'Error refreshing flight price' });
+      return res.status(500).json({ success: false, error: 'Error refreshing flight price' });
     }
   });
   
@@ -116,10 +116,10 @@ export const createTripRouter = (config: {models: any; amadeusService?: AmadeusS
         return res.status(404).json({ success: false, error: 'Saved flight not found' });
       }
   
-      res.json({ success: true, message: 'Flight deleted successfully' });
+      return res.json({ success: true, message: 'Flight deleted successfully' });
     } catch (error) {
       console.error('Error deleting saved flight:', error);
-      res.status(500).json({ success: false, error: 'Error deleting saved flight' });
+      return res.status(500).json({ success: false, error: 'Error deleting saved flight' });
     }
   });
 

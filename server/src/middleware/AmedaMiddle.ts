@@ -28,6 +28,7 @@ export const authenticateToken = (
       const payload = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload;
       req.user = payload;
       next();
+      return;
     } catch (error) {
       return res.status(403).json({
         success: false,

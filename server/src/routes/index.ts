@@ -14,7 +14,7 @@ async function createRouter(p0: { models: Models; }) {
   app.use(express.json());
 
   // Initialize database
-  const { sequelize, models } = await inititializeDatabase();
+  const { models } = await inititializeDatabase();
 
   // Public routes - User login/registration
   app.use('/auth', createUserAuthRouter({

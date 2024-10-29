@@ -8,6 +8,9 @@ interface PriceConfirmation {
     currency: string;
 }
 
+interface Itinerary {
+
+}
 
 interface FlightOffer{
     type: string;
@@ -54,10 +57,7 @@ interface Segment {
 }
 
 
-interface Itinerary {
-    duartion: string;
-    segments: Segment[];
-}
+
 
 interface TripCreationAttributes extends Optional<TripAttributes, 'id'> {}
 
@@ -113,6 +113,11 @@ export function TripFactory(sequelize: Sequelize): typeof Trip
         savedAt: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
+        },
+        Segment: {
+            type: DataTypes.JSON,
+            allowNull: true
+
         }
     },
     {

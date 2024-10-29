@@ -1,15 +1,14 @@
-
 export interface FlightSearchParams {
     originLocationCode: string;
     destinationLocationCode: string;
-    departureDate: string;
-    returnDate?: string;
+    departureDate: Date;
+    returnDate: Date;
     adults: number;
-    children?: number;
-    infants?: number;
-    travelClass?: 'ECONOMY' | 'PREMIUM_ECONOMY' | 'BUSINESS' | 'FIRST';
-    maxPrice?: number;
-    currencyCode?: string;
+    travelClass: 'ECONOMY' | 'PREMIUM_ECONOMY' | 'BUSINESS' | 'FIRST';
+    maxPrice: number;
+    currencyCode: string;
+    flightOfferId: string[];
+    iiineraries: string[];
   }
   
   export interface PriceConfirmation {

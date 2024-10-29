@@ -1,12 +1,13 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { JWTPayload } from './AmedaMiddle';
 
 interface JwtPayload {
     username: string;
 }
 
 export const authenticateUser = (
-    req: Request,
+    req: Request & { user?: JWTPayload },
     res: Response,
     next: NextFunction
 ) => {
@@ -16,13 +17,15 @@ export const authenticateUser = (
         const token = authHeader.split(' ')[1];
         const secretKey = process.env.JWT_SECRET_KEY || '';
 
-        jwt.verify(token, secretKey, (err: jwt.VerifyError | null, user: any) => {
+        jwt.verify(token, secretKey, (err: jwt.VerifyErrors | null, user: any) => {
             if(err) {
                 return res.sendStatus(403);
             }
 
             req.user = user as JwtPayload;
+
             next();
+            return
         });
     } else {
         res.sendStatus(401);
