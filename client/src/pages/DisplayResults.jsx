@@ -30,10 +30,34 @@ const DisplayResults = () => {
         setError(err.message);
         setLoading(false);
       }
+
+      if (data.initialOffers) {
+        const tripData = {
+          searchParams: state,
+          results: {
+            initialOffers: data.initialOffers,
+            confirmedPrices: data.confirmedPrices
+          }
+        };
+        
+        // Save to backend
+        await fetch('/api/trips', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(tripData)
+        });
+      }
+
+
     };
 
     fetchFlightResults();
-  }, [state]);
+  }, [state]); 
+
+
+  
 
   return (
     <div className="container">

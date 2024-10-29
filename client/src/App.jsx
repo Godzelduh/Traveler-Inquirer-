@@ -9,6 +9,15 @@ import Footer from './components/footer';
 
 
 function App() {
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('amadeusToken');
+    localStorage.removeItem('userId');
+    navigate('/login');
+  };
+
+
   return (
     <Router>
       <div>
