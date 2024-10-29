@@ -7,6 +7,7 @@ import DisplayUsers from './pages/DisplayUsers';
 import Nav from './components/Navbar';
 import Footer from './components/footer';
 import Contact from './pages/Contact';
+import Home from './pages/Home';
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
       <div>
         <Nav />
         <Routes>
-          <Route path="/" element={<FlightSearch />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/flights" element={<FlightSearch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />
