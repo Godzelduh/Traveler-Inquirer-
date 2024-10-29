@@ -1,52 +1,67 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 function Navbar() {
-    return (
-        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                    <h1>Logo</h1>
-                </a>
+  const location = useLocation();
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+  return (
+    <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+        <a className="navbar-item" href="/">
+        <img src="TravelLogo.jpg" alt="Logo"/>
+        </a>
+
+        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" className="navbar-menu">
+        <div className="navbar-start">
+          <Link to="/" className="navbar-item">
+            Home
+          </Link>
+
+          {location.pathname !== '/contact' && (
+            <Link to="/contact" className="navbar-item">
+              Contact
+            </Link>
+          )}
+
+          {location.pathname !== '/results' && (
+            <Link to="/results" className="navbar-item">
+              Display Results
+            </Link>
+          )}
+
+          {location.pathname !== '/users' && (
+            <Link to="/users" className="navbar-item">
+              Display Users
+            </Link>
+          )}
+        </div>
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              {location.pathname === '/' && (
+                <>
+                  <a className="button is-primary">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a href="/login" className="button is-light">
+                    Log in
+                  </a>
+                </>
+              )}
             </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a href="/" class="navbar-item">
-                        Home
-                    </a>
-
-                    <a href="/results" class="navbar-item">
-                        Display Results
-                    </a>
-
-                    <a href="/users" class="navbar-item">
-                        Display Users
-                    </a>
-
-                
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary">   
-                                <strong>Sign up</strong>
-                            </a>
-                            <a href="/login" class="button is-light">
-                                Log in
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-    )
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

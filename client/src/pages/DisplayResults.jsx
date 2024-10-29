@@ -4,6 +4,8 @@ import 'bulma/css/bulma.css';
 
 const DisplayResults = () => {
   const { state } = useLocation();
+
+
   const [flightResults, setFlightResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,6 +55,7 @@ const DisplayResults = () => {
               </div>
             </div>
           ))}
+ main
         </div>
       )}
     </div>
