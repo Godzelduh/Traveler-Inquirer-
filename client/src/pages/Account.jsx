@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bulma/css/bulma.css';
 
-const AccountPage = () => {
+const Account = () => {
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -178,4 +178,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default Account;

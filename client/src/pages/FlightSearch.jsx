@@ -106,17 +106,6 @@ const FlightSearch = () => {
               </div>
             </div>
           </div>
-    {/* <div className="column is-half">
-      <div className="field">
-        <label className="label">Travel Class</label>
-        <div className="control">
-          <span className="input is-rounded" style={{ width: '100%' }}>
-            {searchParams.travelClass}
-          </span>
-        </div>
-      </div>
-    </div> */}
-    
     
     <div className="column is-half">
       <div className="field">
