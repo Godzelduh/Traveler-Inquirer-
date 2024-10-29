@@ -7,7 +7,7 @@ import { FlightSearchParams, FlightOffer, PriceConfirmation } from '../types/fli
 
 
 export class TripService {
-  confirmPrices(flightOffer: FlightOffer) {
+  confirmPrices() {
     throw new Error("Method not implemented.");
   }
   constructor(

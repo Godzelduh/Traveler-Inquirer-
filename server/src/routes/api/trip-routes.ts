@@ -30,8 +30,15 @@ export const createTripRouter = (config: {models: any; amadeusService?: AmadeusS
     process.env.NODE_ENV === 'production'
   );
   
-  const tripService = new TripService(amadeusService);
-  const savedTripService = new SavedTripService(tripService);
+  if (!amadeusService) {
+    throw new Error('AmadeusService is not defined');
+  }
+  const tripRepository = new TripService(amadeusService, models);
+  if (!amadeusService) {
+    throw new Error('AmadeusService is not defined');
+  }
+ 
+  const savedTripService = new SavedTripService(tripRepository);
   
   // Save a flight
   router.post('/', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
