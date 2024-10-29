@@ -28,4 +28,3 @@ export const authenticateUser = (
         res.sendStatus(401);
     }
 }
-}
