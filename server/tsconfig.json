@@ -2,7 +2,6 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
       /* Modules */
-      "moduleResolution": "node16",  // or "nodenext"
       "esModuleInterop": true,
       "strict": true,
       "target": "ES2020",
