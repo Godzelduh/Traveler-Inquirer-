@@ -2,12 +2,14 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
       /* Modules */
-      "module": "NodeNext",
-      "moduleResolution": "NodeNext",
+      "moduleResolution": "node16",  // or "nodenext"
+      "esModuleInterop": true,
+      "strict": true,
+      "target": "ES2020",
+      "allowJs": true,
+      "declaration": true,
       "rootDir": "src",
       "outDir": "dist",
-      "strict": true /* Enable all strict type-checking options. */,
-      "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. */,
       "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */
   },
   "include": ["src/**/*"],

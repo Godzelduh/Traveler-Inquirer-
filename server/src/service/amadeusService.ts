@@ -41,12 +41,12 @@ export class AmadeusService {
       if (!tokenResponse.ok) {
         throw new Error('Failed to obtain Amadeus access token');
       }
-  
-      const tokenData = await tokenResponse.json();
+      
+      const tokenData: { access_token: string; expires_in: number } = await tokenResponse.json();
       this.token = tokenData.access_token;
       this.tokenExpiration = Date.now() + (tokenData.expires_in * 1000);
       
-      return this.token;
+      return this.token!;
     }
   
     private async makeRequest(endpoint: string, method: 'GET' | 'POST', data?: any) {

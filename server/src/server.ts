@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createApp } from './App.js';
 import { inititializeDatabase } from './models/index.js';
+import {Request , Response} from 'express';
 
 dotenv.config();
 
@@ -41,7 +42,7 @@ async function startServer() {
 
       // The "catchall" handler: for any request that doesn't match the API routes
       // send back the index.html file.
-      app.get('*', (req, res) => {
+      app.get('*', (req: Request , res: Response) => {
         res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
       });
     }

@@ -1,6 +1,5 @@
 import { Trip } from '../models/Trip.js';
 import { User } from '../models/user.js';
-import { Op } from 'sequelize';
 
 export class TripRepository {
   async saveTrip(tripData: Partial<Trip>, user: User): Promise<Trip> {

@@ -1,12 +1,15 @@
-import { AmadeusService } from './amadeusService';
+import { AmadeusService } from './amadeusService.js';
 import { TripRepository } from '../service/FlightServiceSearch.js';
 import { User } from '../models/user.js';
-import { FlightSearchParams, FlightOffer, PriceConfirmation } from '../types/flightTypes';
+import { FlightSearchParams, FlightOffer, PriceConfirmation } from '../types/flightTypes.js';
 
 
 
 
 export class TripService {
+  confirmPrices(flightOffer: FlightOffer) {
+    throw new Error("Method not implemented.");
+  }
   constructor(
     private amadeusService: AmadeusService,
     private tripRepository: TripRepository
@@ -24,7 +27,11 @@ export class TripService {
     const initialOffers = await this.amadeusService.searchFlights(params);
 
     // Confirm prices for the offers
-    const confirmedPrices = await this.amadeusService.confirmPrice(initialOffers);
+    const confirmedPrices: PriceConfirmation = {
+      ...await this.amadeusService.confirmPrice(initialOffers),
+      total: 0, // Replace with actual total calculation
+      currency: 'USD' // Replace with actual currency
+    };
 
     // Save the search and results
     const savedTrip = await this.tripRepository.saveTrip({

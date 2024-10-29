@@ -1,4 +1,4 @@
-import express, { Router, Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import { authenticateToken } from '../../middleware/AmedaMiddle.js';
 import { SavedTripService } from '../../service/savedTripService.js';
 import { TripService } from '../../service/tripService.js';
@@ -12,16 +12,19 @@ interface AuthenticatedRequest extends Request {
       id: number;
       username: string;
       password: string;
-    }
+    };
+    body: any;
+    params: any;
 }
 
 
 
 
-export const createTripRouter = (models: any) => {
+export const createTripRouter = (config: {models: any; amadeusService?: AmadeusService}) => {
   const router = Router();
+  const { models, amadeusService } = config;
 
-  const amadeusService = new AmadeusService(
+   new AmadeusService(
     process.env.AMADEUS_CLIENT_ID!,
     process.env.AMADEUS_CLIENT_SECRET!,
     process.env.NODE_ENV === 'production'
