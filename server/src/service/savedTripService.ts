@@ -1,7 +1,7 @@
 import { Trip } from "../models/trip.js";
 import { TripService } from "../service/tripService.js";
 import { User } from "../models/user.js";
-import { FlightSearchParams, FlightOffer, PriceConfirmation } from "../types/flightTypes.js";
+import { FlightSearchParams, FlightOffer } from "../types/flightTypes.js";
 
 
 
@@ -20,7 +20,17 @@ export class SavedTripService {
 
       return await Trip.create({
         userId: user.id,
-        searchParams,
+        searchParams: {
+          fromLocation: searchParams.originLocationCode,
+          toLocation: searchParams.destinationLocationCode,
+          departureDate: searchParams.departureDate,
+          returnDate: searchParams.returnDate,
+          adults: searchParams.adults,
+          travelClass: searchParams.travelClass,
+          maxPrice: searchParams.maxPrice,
+          flightOfferId: searchParams.flightOfferId,
+          itineraries: searchParams.itineraries,
+        },
         flightOffer,
         priceConfirmation: confirmedPrice,
       });

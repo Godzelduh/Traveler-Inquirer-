@@ -42,7 +42,7 @@ async function startServer() {
 
       // The "catchall" handler: for any request that doesn't match the API routes
       // send back the index.html file.
-      app.get('*', (req: Request , res: Response) => {
+      app.get('*', (_req: Request , res: Response) => {
         res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
       });
     }

@@ -1,4 +1,3 @@
-import express from 'express';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import { JWTPayload } from './AmedaMiddle.js';

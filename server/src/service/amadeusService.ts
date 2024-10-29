@@ -1,6 +1,6 @@
 import { URLSearchParams } from "url";
 import { FlightSearchParams, PriceConfirmation } from "../types/flightTypes.js";
-import { AmadeusAuthService } from "../middleware/AmedaAuth.js";
+
 
 export class AmadeusService {
     private baseUrl: string;
