@@ -88,8 +88,25 @@ const FlightSearch = () => {
         </div>
       </div>
     </div>
-    
     <div className="column is-half">
+            <div className="field">
+              <label className="label">Travel Class</label>
+              <div className="control">
+                <div className="select is-rounded" style={{ width: '100%' }}>
+                  <select
+                    name="travelClass"
+                    value={searchParams.travelClass}
+                    onChange={handleInputChange}
+                  >
+                    <option value="ECONOMY">ECONOMY</option>
+                    <option value="BUSINESS">BUSINESS</option>
+                    <option value="PREMIUM ECONOMY">PREMIUM ECONOMY</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+    {/* <div className="column is-half">
       <div className="field">
         <label className="label">Travel Class</label>
         <div className="control">
@@ -98,7 +115,7 @@ const FlightSearch = () => {
           </span>
         </div>
       </div>
-    </div>
+    </div> */}
     
     
     <div className="column is-half">
