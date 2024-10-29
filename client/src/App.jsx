@@ -10,6 +10,15 @@ import Contact from './pages/Contact';
 
 
 function App() {
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('amadeusToken');
+    localStorage.removeItem('userId');
+    navigate('/login');
+  };
+
+
   return (
     <Router>
       <div>
