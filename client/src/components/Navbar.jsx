@@ -36,11 +36,11 @@ function Navbar() {
             </Link>
           )} 
 
-          {/* {location.pathname !== '/users' && (
-            <Link to="/users" className="navbar-item">
-              Display Users
+          {location.pathname !== '/account' && (
+            <Link to="/account" className="navbar-item">
+              Account
             </Link>
-          )} */}
+          )}
         </div>
 
         <div className="navbar-end">

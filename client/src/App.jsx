@@ -8,6 +8,7 @@ import Nav from './components/Navbar';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import Account from './pages/Account';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/flights" element={<FlightSearch />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />
