@@ -4,11 +4,11 @@ import '../styles/style.css';
 
 const DisplayResults = () => {
   const { state } = useLocation();
-  
+
   return (
     <div>
       <section className="no-padding">
-        <img src='./beach.png' alt="Full-width image" className="image is-fullwidth" />
+        <img src='./Beaches.jpg' alt="Full-width image" className="image is-fullwidth" />
       </section>
       <div className='navbar is-primary pt-3'>
         <div className="navbar-brand">

@@ -35,7 +35,7 @@ const Login = () => {
                   <label className="label">Username:</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="input is-rounded is-primary"
                       type="text has-text-black"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
@@ -47,7 +47,7 @@ const Login = () => {
                   <label className="label">Password:</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="input is-rounded is-primary"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +70,7 @@ const Login = () => {
                     <div className="columns">
                       <div className="column">
                         <figure className="image is-4by5">
-                          <img src="./backpack-traveler.png" alt="Backpack Traveler"></img>
+                          <img src="./backpack-traveller.png" alt="Backpack Traveler"></img>
                         </figure>
                       </div>
                       <div className="column">

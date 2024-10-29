@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import DisplayResults from './pages/DisplayResults';
+import DisplayResults from '../src/pages/DisplayResults';
 import DisplayUsers from './pages/DisplayUsers';
 import Navbar from './components/Navbar';
 import Footer from './components/footer';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         
       <Footer />
