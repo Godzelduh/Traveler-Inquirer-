@@ -72,9 +72,7 @@ Kimani Chambliss - https://github.com/ManiChams
 
 ## Resources 
 
-Travel API - FLIGHT_API_KEY=RnvXDQSsQKDVGPprpOrZP4VhvRskMhsQ 
 
-Secret Key API - APi secret KEy: sVbCQUkKyl3zCd0r
 
 ## License
 
