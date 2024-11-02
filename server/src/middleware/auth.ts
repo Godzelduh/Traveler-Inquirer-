@@ -4,6 +4,9 @@ import { JWTPayload } from './AmedaMiddle';
 
 interface JwtPayload {
     username: string;
+    amadeusToken: string;
+    exp: number;
+    iat: number;
 }
 
 export const authenticateUser = (

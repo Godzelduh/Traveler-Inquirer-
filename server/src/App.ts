@@ -8,7 +8,7 @@ interface AppConfig {
   }
 
 
-  export async function createApp({ models }: AppConfig) {
+  export async function createApp({}: AppConfig) {
     const app = express();
   
     // Middleware
@@ -16,7 +16,7 @@ interface AppConfig {
     app.use(express.json());
     
     // Routes
-    const router = await createRouter({ models });
+    const router = await createRouter();
     app.use('/api', router);
   
     // Error handling

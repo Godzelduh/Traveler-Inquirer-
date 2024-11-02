@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createApp } from './App.js';
 import { inititializeDatabase } from './models/index.js';
-import {Request , Response} from 'express';
+import express, { Request, Response } from 'express';
 
 dotenv.config();
 

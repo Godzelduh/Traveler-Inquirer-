@@ -1,28 +1,30 @@
 import {DataTypes, type Sequelize, Model, type Optional} from 'sequelize';
+import { PriceConfirmation,} from '../types/flightTypes';
 
 
 
 
-interface PriceConfirmation {
-    total: number;
-    currency: string;
-}
 
-interface Itinerary {
+export interface Itinerary {
+    duration: string;
+    departure: {
+      iataCode: string;
+      at: string;
+    };
+    arrival: {
+      iataCode: string;
+      at: string;
+    };
+    carrierCode: string;
+    number: string;
+    aircraft: {
+      code: string;
+    };
+  }
+  
 
-}
 
-interface FlightOffer{
-    type: string;
-    id: string;
-    lastTicketingDate: string;
-    source:string[];
-    itineraries: Itinerary[];
-    numberOfBookableSeats: number;
-
-}
-
-interface TripAttributes {
+  interface TripAttributes {
     id: number;
     userId: number;
     searchParams: {
@@ -33,28 +35,14 @@ interface TripAttributes {
         adults: number;
         travelClass: string;
         maxPrice: number;
-        flightOfferId: string;
-        itineraries: string;
+        flightOfferId: string;  
     };
-    results?: {
-        initialOffers: FlightOffer[];
-        confirmedPrices: PriceConfirmation;
-    };
+    results: PriceConfirmation;
     savedAt: Date;
-}
+    itineraries?: Itinerary[];
+    }
 
-interface Segment {
-    depature: {
-     iataCode: string;
-     at: string;
-    };
-    arrival: {
-        iataCode: string;
-        at: string;
-    };
-    carrierCode: string;
-    number: string;
-}
+
 
 
 
@@ -62,6 +50,9 @@ interface Segment {
 interface TripCreationAttributes extends Optional<TripAttributes, 'id'> {}
 
 export class Trip extends Model<TripAttributes, TripCreationAttributes> implements TripAttributes {
+    flightOffer() {
+      throw new Error("Method not implemented.");
+    }
     public id!: number;
     public userId!: number;
     public searchParams!: {
@@ -73,14 +64,17 @@ export class Trip extends Model<TripAttributes, TripCreationAttributes> implemen
         travelClass: string;
         maxPrice: number;
         flightOfferId: string;
-        itineraries: string;
+        
     };
-    public results?: {
-        initialOffers: FlightOffer[];
-        confirmedPrices: PriceConfirmation;
-      };
+    public itineraries?: Itinerary[];
+    public results!: PriceConfirmation;
     public readonly savedAt!: Date;
-
+   
+      
+    constructor(init?: Partial<TripAttributes>) {
+        super();
+        Object.assign(this, init);
+    }
   
     
 }
@@ -103,22 +97,30 @@ export function TripFactory(sequelize: Sequelize): typeof Trip
         },
         searchParams: {
             type: DataTypes.JSON,
-            allowNull: false,
-            defaultValue: {}
+            defaultValue: {
+                fromLocation: '',
+                toLocation: '',
+                departureDate: new Date(),
+                returnDate: new Date(),
+                adults: 1,
+                travelClass: 'ECONOMY',
+                maxPrice: 0,
+                flightOfferId: ''
+            }
         },
         results: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING,
             allowNull: true
         },
         savedAt: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
         },
-        Segment: {
+        itineraries: {
             type: DataTypes.JSON,
             allowNull: true
-
         }
+     
     },
     {
         sequelize,

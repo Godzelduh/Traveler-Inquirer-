@@ -1,7 +1,7 @@
-import { Trip } from "../models/trip.js";
+import { Trip} from "../models/trip.js";
 import { TripService } from "../service/tripService.js";
 import { User } from "../models/user.js";
-import { FlightSearchParams, FlightOffer } from "../types/flightTypes.js";
+import { FlightSearchParams  } from "../types/flightTypes.js";
 
 
 
@@ -12,7 +12,7 @@ export class SavedTripService {
 
     async saveTrip(
         searchParams: FlightSearchParams,
-        flightOffer: FlightOffer,
+        flightOffer: Trip,
         user: User
     ): Promise<Trip> {
       const confirmedPrice = await this.tripService.confirmPrices(flightOffer);
@@ -28,11 +28,11 @@ export class SavedTripService {
           adults: searchParams.adults,
           travelClass: searchParams.travelClass,
           maxPrice: searchParams.maxPrice,
-          flightOfferId: searchParams.flightOfferId,
-          itineraries: searchParams.itineraries,
+          flightOfferId: searchParams.flightOfferId.join(', '),
+  
         },
-        flightOffer,
-        priceConfirmation: confirmedPrice,
+        results: confirmedPrice,
+        savedAt: new Date(),
       });
     }
 
@@ -51,7 +51,7 @@ export class SavedTripService {
     }
 
     async refreshTripPrice(savedFlightId: number, userId: number): Promise<Trip | null> {
-        const savedTrip = await savedTrip.findOne({
+        const savedTrip = await Trip.findOne({
             where: {id: savedFlightId, userId},
         });
 
@@ -59,8 +59,9 @@ export class SavedTripService {
             return null;
         }
 
-        const confirmedPrice = await this.tripService.confirmPrice(savedTrip.flightOffer);
+        const confirmedPrice = await this.tripService.confirmPrices(savedTrip);
 
-        await savedTrip.update({priceConfirmation: confirmedPrice});
+        await savedTrip.update({results: confirmedPrice});
+        return savedTrip;
     }
 }

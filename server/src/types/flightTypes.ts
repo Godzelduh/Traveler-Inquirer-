@@ -1,3 +1,7 @@
+import { Itinerary } from '../models/trip.js';
+
+
+
 export interface FlightSearchParams {
     originLocationCode: string;
     destinationLocationCode: string;
@@ -8,22 +12,47 @@ export interface FlightSearchParams {
     maxPrice: number;
     currencyCode: string;
     flightOfferId: string[];
-    iiineraries: string[];
+    itineraries: string;
+    }
+  
+
+  export interface Segment {
+      departure: Departure;
+      arrival: Arrival;
+      carrierCode: string;
+  }
+  
+  export interface Departure {
+      iataCode: string;
+      terminal: string;
+      at: string;
+  }
+  
+  export interface Arrival {
+      iataCode: string;
+      terminal: string;
+      at: string;
+  }
+  
+  export interface Aircraft {
+      code: string;
+  }
+  
+  export interface Operating {
+      carrierCode: string;
   }
   
   export interface PriceConfirmation {
-    total: number;
+    total: string;
     currency: string;
     flightOffers: FlightOffer[];
-    bookingRequirements?: {
-      invoiceAddressRequired?: boolean;
-      mailboxEmailRequired?: boolean;
-      phoneCountryCodeRequired?: boolean;
-      postalCodeRequired?: boolean;
-      travelerRequirements?: any[];
-    };
   }
   
+  export interface Price {
+    total: string;
+    currency: string;
+}
+
 export interface FlightOffer {
     type: string;
     id: string;
@@ -35,7 +64,5 @@ export interface FlightOffer {
     numberOfBookableSeats: number;
     itineraries: Itinerary[];
     price: Price;
-    pricingOptions: PricingOptions;
     validatingAirlineCodes: string[];
-    travelerPricings: TravelerPricing[];
   }
