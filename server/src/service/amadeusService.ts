@@ -1,5 +1,5 @@
 import { URLSearchParams } from "url";
-import { FlightSearchParams, PriceConfirmation } from "../types/flightTypes.js";
+import { FlightSearchParams, PriceConfirmation, FlightOffer } from "../types/flightTypes.js";
 
 
 export class AmadeusService {
@@ -42,7 +42,7 @@ export class AmadeusService {
         throw new Error('Failed to obtain Amadeus access token');
       }
       
-      const tokenData: { access_token: string; expires_in: number } = await tokenResponse.json();
+      const tokenData = await tokenResponse.json() as { access_token: string; expires_in: number };
       this.token = tokenData.access_token;
       this.tokenExpiration = Date.now() + (tokenData.expires_in * 1000);
       
@@ -76,7 +76,7 @@ export class AmadeusService {
         throw new Error(JSON.stringify(errorData));
       }
   
-      return response.json();
+      return response.json() as Promise<any>;
     }
   
     async searchFlights(params: FlightSearchParams): Promise<FlightOffer[]> {
@@ -92,7 +92,7 @@ export class AmadeusService {
       };
   
       const response = await this.makeRequest('/shopping/flight-offers', 'GET', searchParams);
-      return response.data;
+      return response.data as FlightOffer[];
     }
   
     async confirmPrice(flightOffers: FlightOffer[]): Promise<PriceConfirmation> {

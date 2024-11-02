@@ -1,15 +1,15 @@
-import { express, Router } from 'express';
+import  express from 'express';
 import dotenv from 'dotenv';
 import { createUserAuthRouter } from './auth/userAuthRoute.js';
 import { createAmadeusRouter } from './auth/amedaRoute.js';
 import { createProtectedRouter } from './api/index.js';
-import { inititializeDatabase, Models } from '../models/index.js';
+import { inititializeDatabase,} from '../models/index.js';
 import { authenticateUser } from '../middleware/auth.js';
 
 
 dotenv.config();
 
-async function createRouter(p0: { models: Models; }) {
+async function createRouter( ) {
   const app = express();
   app.use(express.json());
 
