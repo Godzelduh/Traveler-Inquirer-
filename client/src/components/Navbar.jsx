@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import auth from '../utlis/auth';
 
 function Navbar() {
   const location = useLocation();
@@ -30,7 +31,7 @@ function Navbar() {
             </Link>
           )}
 
-           {location.pathname !== '/flights' && (
+           {(location.pathname !== '/flights' && auth.loggedIn()) && (
             <Link to="/flights" className="navbar-item">
             Flight Search
             </Link>

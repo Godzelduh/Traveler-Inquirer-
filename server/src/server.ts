@@ -14,14 +14,14 @@ async function startServer() {
   try {
     // Validate required environment variables
     const requiredEnvVars = [
-      'DATABASE_URL',
+      // 'DATABASE_URL',
       'DB_USER',
-      'DB_PASSWORD',
+      'DB_PASS',
       'DB_NAME',
       'JWT_SECRET_KEY',
       'AMADEUS_CLIENT_ID',
       'AMADEUS_CLIENT_SECRET',
-      'AMADEUS_API_URL',
+      // 'AMADEUS_API_URL',
     ];
 
     for (const envVar of requiredEnvVars) {

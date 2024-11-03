@@ -1,5 +1,5 @@
 import express from 'express';
-import createRouter from '../src/routes/index.js';
+import createRouter from './routes/index.js';
 import { Models } from './models/index.js';
 
 
@@ -17,10 +17,10 @@ interface AppConfig {
     
     // Routes
     const router = await createRouter();
-    app.use('/api', router);
+    app.use(router);
   
     // Error handling
-   app.use()
+  //  app.use()
 
     return app;
   }

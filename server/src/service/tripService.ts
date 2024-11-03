@@ -99,23 +99,32 @@ export class TripService {
     const initialOffers = await this.amadeusService.searchFlights(params);
     const confirmedPrices = await this.amadeusService.confirmPrice(initialOffers);
 
-    const tripData = new Trip({
-      searchParams: {
-        fromLocation: params.originLocationCode,
-        toLocation: params.destinationLocationCode,
-        departureDate: params.departureDate,
-        returnDate: params.returnDate,
-        adults: params.adults,
-        travelClass: params.travelClass,
-        maxPrice: params.maxPrice || 0,
-        flightOfferId: initialOffers[0]?.id || ''
-      },
-      results: confirmedPrices,
-      itineraries: initialOffers[0]?.itineraries || [],
+    // const tripData = new Trip({
+    //   searchParams: {
+    //     fromLocation: params.originLocationCode,
+    //     toLocation: params.destinationLocationCode,
+    //     departureDate: params.departureDate,
+    //     returnDate: params.returnDate,
+    //     adults: params.adults,
+    //     travelClass: params.travelClass,
+    //     maxPrice: params.maxPrice || 0,
+    //     flightOfferId: initialOffers[0]?.id || ''
+    //   },
+    //   results: confirmedPrices,
+    //   itineraries: initialOffers[0]?.itineraries || [],
 
-    });
+    // });
 
-    const savedTrip = await this.tripRepository.saveTrip(tripData, user, );
+    const savedTrip = await this.tripRepository.saveTrip(user, {
+      fromLocation: params.originLocationCode,
+      toLocation: params.destinationLocationCode,
+      departureDate: params.departureDate,
+      returnDate: params.returnDate,
+      adults: params.adults,
+      travelClass: params.travelClass,
+      maxPrice: params.maxPrice || 0,
+      flightOfferId: initialOffers[0]?.id || ''
+    }, confirmedPrices);
 
     return {
       initialOffers,

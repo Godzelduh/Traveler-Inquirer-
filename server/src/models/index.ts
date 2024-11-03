@@ -16,11 +16,11 @@ export async function inititializeDatabase(): Promise<{
     sequelize: Sequelize,
     models: DatabaseModels
 }> {
-    const sequelize = new Sequelize(process.env.DATABASE_URL || '', {
+    const sequelize = new Sequelize( {
         dialect: 'postgres',
         host: process.env.DB_HOST || 'localhost',
         username: process.env.DB_USER || 'postgres',
-        password: process.env.DB_PASSWORD || '',
+        password: process.env.DB_PASS || '',
         database: process.env.DB_NAME || 'TravelDB',
         logging: process.env.NODE_ENV !== 'production',
     })
