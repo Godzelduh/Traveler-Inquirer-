@@ -48,7 +48,7 @@ function Navbar() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {location.pathname === '/' && (
+              {location.pathname === '/Login' && (
                 <>
                   {/* <a className="button is-primary">
                     <strong>Sign up</strong>

@@ -1,5 +1,6 @@
 // App.ts
 import express from 'express';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import { userRouter } from './routes/api/user-routes.js';
 import { createUserAuthRouter } from './routes/auth/userAuthRoute.js';
@@ -12,7 +13,7 @@ interface AppConfig {
 
 export async function createApp({ models }: AppConfig) {
   const app = express();
-
+  dotenv.config();
   // Configure CORS - This must come BEFORE other middleware and routes
   const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 

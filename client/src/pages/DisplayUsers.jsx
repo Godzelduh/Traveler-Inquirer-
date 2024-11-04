@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav';
+import { retrieveUsers } from '../api/userAPI';
+import auth from '../utils/auth';
 
 const DisplayUsers = () => {
   const [users, setUsers] = useState([]);

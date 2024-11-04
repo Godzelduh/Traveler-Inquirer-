@@ -1,32 +1,42 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../api/authAPI';
+import  UserLogin  from '../interfaces/userLogin';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState(new UserLogin('', ''));
   const navigate = useNavigate();
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/auth/login', {
-        username,
-        password,
-      });
+      const response = await login(loginData) 
+      Auth.login(response.data.token);
       if (response.data) {
         // After successful login, redirect to the results page or user profile
-        navigate('/users');
+        navigate('/Account');
       }
-    } catch (error) {
-      console.error('Login failed', error);
-    }
+      } catch (error) {
+        console.error('Login failed', error);
+      }
+      {      
+   
   };
 
   const handleSignupClick = (e) => {
-    e.preventDefault(); // Prevent form submission
-    navigate('/signup'); // Navigate to signup page
+    e.preventDefault();
+    navigate('/signup');
   };
 
   return (
@@ -43,8 +53,8 @@ const Login = () => {
                     <input
                       className="input is-rounded is-primary"
                       type="text has-text-black"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={loginData.username}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -55,8 +65,8 @@ const Login = () => {
                     <input
                       className="input is-rounded is-primary"
                       type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      value={loginData.password}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -77,7 +87,22 @@ const Login = () => {
                 </div>
               </form>
               <aside>
-                {/* Rest of your aside content remains the same */}
+                <section className="section">
+                  <div className="container">
+                    <div className="columns">
+                      <div className="column">
+                        <figure className="image is-4by5">
+                          <img src="./backpack-traveller.png" alt="Backpack Traveler"></img>
+                        </figure>
+                      </div>
+                      <div className="column">
+                        <figure className="image is-4by5">
+                          <img src="first-class-flight.webp" alt="First Class Sign"></img>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </aside>
             </div>
           </section>
@@ -86,6 +111,7 @@ const Login = () => {
     </>
   );
 };
+}
 
 export default Login;
 // const handleLogin = async (credentials) => {
