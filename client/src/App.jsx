@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Account from './pages/Account';
+import Signup from './components/Signup';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/flights" element={<FlightSearch />} />
           <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/results" element={<DisplayResults />} />
           <Route path="/users" element={<DisplayUsers />} />
           <Route path="/contact" element={<Contact />} />
