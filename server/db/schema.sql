@@ -1,7 +1,7 @@
 -- Drop Database
-DROP DATABASE IF EXISTS TravelDB;
+DROP DATABASE IF EXISTS travelDB;
 
 -- Create Database
-CREATE DATABASE TravelDB;
+CREATE DATABASE travelDB;
 
 

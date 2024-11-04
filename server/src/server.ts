@@ -1,40 +1,42 @@
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 import { createApp } from './App.js';
-import { inititializeDatabase } from './models/index.js';
+// import { inititializeDatabase } from './models/index.js';
 import express, { Request, Response } from 'express';
+import cors from 'cors';
+import { Sequelize } from 'sequelize';
+import { Models } from './types/models.js';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function startServer() {
-  try {
-    // Validate required environment variables
-    const requiredEnvVars = [
-      // 'DATABASE_URL',
-      'DB_USER',
-      'DB_PASS',
-      'DB_NAME',
-      'JWT_SECRET_KEY',
-      'AMADEUS_CLIENT_ID',
-      'AMADEUS_CLIENT_SECRET',
-      // 'AMADEUS_API_URL',
-    ];
-
-    for (const envVar of requiredEnvVars) {
-      if (!process.env[envVar]) {
-        throw new Error(`Missing required environment variable: ${envVar}`);
-      }
+   const sequelize = new Sequelize(/* your database config */);
+    
+    // Initialize your models here
+    const models: Models = {
+      sequelize,
+      User: /* your User model initialization */,
+      // ... other models
     }
-
-    // Initialize database and get models
-    const { sequelize, models } = await inititializeDatabase();
-
+  
     // Create Express app with models
     const app = await createApp({ models });
+
+    // Configure CORS
+    const corsOptions = {
+      origin: process.env.NODE_ENV === 'production' 
+        ? process.env.FRONTEND_URL // Use your production frontend URL
+        : ['http://localhost:5173', 'http://127.0.0.1:5173'], // Development frontend URLs
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true, // Enable if you're using cookies/sessions
+      maxAge: 86400 // CORS preflight cache time in seconds
+    };
+
+    // Apply CORS middleware before other routes
+    app.use(cors(corsOptions));
 
     // Serve static files from the React app in production
     if (process.env.NODE_ENV === 'production') {
