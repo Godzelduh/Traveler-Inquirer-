@@ -37,11 +37,12 @@ function Navbar() {
             </Link>
           )} 
 
-          {location.pathname !== '/account' && (
+          {location.pathname !== '/account' && auth.loggedIn() && (
             <Link to="/account" className="navbar-item">
               Account
             </Link>
           )}
+                   
         </div>
 
         <div className="navbar-end">
