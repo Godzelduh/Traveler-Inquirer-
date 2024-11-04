@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Auth from './auth';
+import UserAuth from '../interfaces/userSignup';
 
 const Signup = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [userAuth, setUserAuth] = useState(new UserAuth('', ''));
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -14,24 +14,37 @@ const Signup = () => {
     setError('');
 
     // Basic validation
-    if (password !== confirmPassword) {
+    if (userAuth.getPassword() !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/auth/signup', {
-        username,
-        password,
+      const response = await fetch('http://localhost:3001/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: userAuth.getUsername(),
+          password: userAuth.getPassword(),
+        }),
       });
 
-      if (response.data.success) {
-        // Automatically log in the user or redirect to login page
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      if (data.token) {
+        Auth.login(data.token);
+      } else {
         navigate('/login');
       }
     } catch (error) {
-      console.error('Signup failed', error);
-      setError(error.response?.data?.message || 'Signup failed. Please try again.');
+      console.error('Signup failed:', error);
+      setError(error.message || 'Signup failed. Please try again.');
     }
   };
 
@@ -53,8 +66,11 @@ const Signup = () => {
                   <input
                     className="input is-rounded is-primary"
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={userAuth.getUsername()}
+                    onChange={(e) => {
+                      const newUserAuth = new UserAuth(e.target.value, userAuth.getPassword());
+                      setUserAuth(newUserAuth);
+                    }}
                     required
                   />
                 </div>
@@ -65,8 +81,11 @@ const Signup = () => {
                   <input
                     className="input is-rounded is-primary"
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={userAuth.getPassword()}
+                    onChange={(e) => {
+                      const newUserAuth = new UserAuth(userAuth.getUsername(), e.target.value);
+                      setUserAuth(newUserAuth);
+                    }}
                     required
                   />
                 </div>

@@ -1,7 +1,22 @@
-import React from 'react';
+import {useState, useLayoutEffect} from 'react';
 import 'bulma/css/bulma.css';
+import { retrieveUsers } from '../api/userAPI';
+import auth from '../utlis/auth';
+import { login } from '../api/authAPI';
 
 const Home = () => {
+    conts [loginCheck, setLoginCheck] = useState(false);
+
+    useLayoutEffect(() => {
+        checkLogin();
+    }, [loginCheck]);
+
+    const checkLogin =  () => {
+        if (auth.loggedIn()) {
+            setLoginCheck(true);
+        }
+    }
+
     return (
         <div className='has-background-info-light pl-28'>
             <div className="container">

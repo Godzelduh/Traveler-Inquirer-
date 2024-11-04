@@ -55,7 +55,7 @@ const Account = () => {
         setUser(userData);
 
         // Fetch trips
-        const tripsData = await authenticatedFetch('/api/trips');
+        const tripsData = await authenticatedFetch('/api/trips?limit=5');
         setTrips(tripsData.data);
         
         setLoading(false);

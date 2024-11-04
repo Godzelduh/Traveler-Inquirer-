@@ -29,7 +29,23 @@ const FlightSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Add your submit logic here
+    setError('');
+
+    try {
+      // Navigate to display results with search params
+      navigate('/results', { 
+        state: {
+          ...searchParams,
+          fromLocation: searchParams.originLocationCode,
+          toLocation: searchParams.destinationLocationCode,
+          maxPrice: null, // You can add a max price field if needed
+          flightOfferId: null // This will be set when a specific flight is selected
+        }
+      });
+    } catch (err) {
+      setError('Failed to process search. Please try again.');
+      setLoading(false);
+    }
   };
 
   return (

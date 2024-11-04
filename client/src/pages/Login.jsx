@@ -1,26 +1,46 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../api/authAPI';
+import { UserLogin } from '../interfaces/userLogin';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState<UserLogin>({ 
+    username: '', 
+    password: '',
+  });
   const navigate = useNavigate();
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/auth/login', {
-        username,
-        password,
-      });
+      const response = await login(loginData) 
+      Auth.login(response.data.token);
       if (response.data) {
         // After successful login, redirect to the results page or user profile
         navigate('/users');
       }
-    } catch (error) {
-      console.error('Login failed', error);
-    }
+      } catch (error) {
+        console.error('Login failed', error);
+      }
+      {      
+    
+
+   
+  };
+
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+    navigate('/signup');
   };
 
   return (
@@ -37,8 +57,8 @@ const Login = () => {
                     <input
                       className="input is-rounded is-primary"
                       type="text has-text-black"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={loginData.username}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -49,8 +69,8 @@ const Login = () => {
                     <input
                       className="input is-rounded is-primary"
                       type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      value={loginData.password}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -60,7 +80,13 @@ const Login = () => {
                     <button className="button is-primary" type="submit">Login</button>
                   </div>
                   <div className="control">
-                    <button className="button is-primary" type="submit">Already a member? Sign up!</button>
+                    <button 
+                      className="button is-primary" 
+                      onClick={handleSignupClick}
+                      type="button" // Change to type="button" to prevent form submission
+                    >
+                      Not a member? Sign up!
+                    </button>
                   </div>
                 </div>
               </form>
@@ -89,5 +115,6 @@ const Login = () => {
     </>
   );
 };
+}
 
 export default Login;
